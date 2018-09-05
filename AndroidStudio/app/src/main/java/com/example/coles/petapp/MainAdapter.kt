@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.petcard.view.*
 
-class MainAdapter: RecyclerView.Adapter<CustomViewHolder>(){
+class MainAdapter(val currentAnimal: CurrentAnimal): RecyclerView.Adapter<CustomViewHolder>(){
 
-    val petName = "Belmont"//GET request.petName
+    //val petName = "Belmont"//GET request.petName
 
     override fun getItemCount(): Int {
         return 1
@@ -21,7 +21,10 @@ class MainAdapter: RecyclerView.Adapter<CustomViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.view.petName.text = petName
+        val petsName = currentAnimal.petfinder.pet.name
+        holder.view.petName.text = petsName.t
+        val petsDescription = currentAnimal.petfinder.pet.description
+        holder.view.petDescription.text = petsDescription.t
     }
 }
 
