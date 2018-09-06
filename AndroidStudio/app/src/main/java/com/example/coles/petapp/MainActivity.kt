@@ -4,9 +4,12 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.widget.Toast
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.petcard.*
 import okhttp3.*
 import java.io.IOException
 import java.lang.reflect.Array
@@ -21,8 +24,15 @@ class MainActivity : AppCompatActivity() {
         recyclerView_main.layoutManager = LinearLayoutManager(this)
         //recyclerView_main.adapter = MainAdapter()
 
+        fetchJSON()
 
+//        nextButton.setOnClickListener {
+//           // fetchJSON()
+//            Toast.makeText(this@MainActivity, "Maybe you'll love this one!", Toast.LENGTH_SHORT).show()
+//        }
+    }
 
+    fun nextButton(v: View){
         fetchJSON()
     }
 
@@ -42,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 val currentAnimal = gson.fromJson(body, CurrentAnimal::class.java)
 
+
                 runOnUiThread {
                     recyclerView_main.adapter = MainAdapter(currentAnimal)
                 }
@@ -56,18 +67,6 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-class CurrentAnimal(val petfinder: Animal)
 
-class Animal(val pet: Pet)
-
-class Pet(val name: Name, val media: Media, val description: Description)
-
-class Media(val photos: Photos)
-
-class Photos(@SerializedName("photo") val photo: List<Photo>)
-
-class Description(@SerializedName("\$t") val t: String)
-class Photo(@SerializedName("\$t") val t: String)
-class Name(@SerializedName("\$t") val t: String)
 
 //class Name(val `$t`: String)

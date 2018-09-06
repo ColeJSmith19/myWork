@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.petcard.view.*
 
 class MainAdapter(val currentAnimal: CurrentAnimal): RecyclerView.Adapter<CustomViewHolder>(){
@@ -25,6 +26,9 @@ class MainAdapter(val currentAnimal: CurrentAnimal): RecyclerView.Adapter<Custom
         holder.view.petName.text = petsName.t
         val petsDescription = currentAnimal.petfinder.pet.description
         holder.view.petDescription.text = petsDescription.t
+        val petsPicture = holder.view.petPicture
+        Picasso.get().load(currentAnimal.petfinder.pet.media.photos.photo[2].t).into(petsPicture)
+
     }
 }
 
