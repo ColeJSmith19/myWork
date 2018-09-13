@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         println("Attempting to fetch")
         val tempUrl = "http://api.petfinder.com/pet.getRandom?key=8c471c274a06a2a995c86e269b15f016&output=basic&format=json"
         val request = Request.Builder().url(tempUrl).build()
-        //val belmont = "${'$'}t"
         val client = OkHttpClient()
 
         client.newCall(request).enqueue(object: Callback{
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
                 runOnUiThread {
                     recyclerView_main.adapter = MainAdapter(currentAnimal)
+                    //recyclerView_main.adapter = PetDetailActivity(currentAnimal)
                 }
             }
 
@@ -65,8 +65,3 @@ class MainActivity : AppCompatActivity() {
         })
     }
 }
-
-
-
-
-//class Name(val `$t`: String)

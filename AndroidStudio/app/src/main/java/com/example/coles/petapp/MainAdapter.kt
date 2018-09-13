@@ -1,5 +1,6 @@
 package com.example.coles.petapp
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ class MainAdapter(val currentAnimal: CurrentAnimal): RecyclerView.Adapter<Custom
         return 1
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, p1: Int): CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, position: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent?.context)
         val cellForRow = layoutInflater.inflate(R.layout.petcard, parent, false)
         return CustomViewHolder(cellForRow)
@@ -29,9 +30,21 @@ class MainAdapter(val currentAnimal: CurrentAnimal): RecyclerView.Adapter<Custom
         val petsPicture = holder.view.petPicture
         Picasso.get().load(currentAnimal.petfinder.pet.media.photos.photo[2].t).into(petsPicture)
 
+
+
+
     }
 }
 
 class CustomViewHolder(val view: View): RecyclerView.ViewHolder(view){
+    init {
+        view.setOnClickListener {
+            val intent = Intent(view.context, PetDetailActivity::class.java)
 
+            intent.putExtra("adoptionInfo", "Adoption Info")
+
+
+            view.context.startActivity(intent)
+        }
+    }
 }
